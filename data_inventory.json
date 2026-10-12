@@ -1,0 +1,66 @@
+{
+  "_comment": "Kenya Data Protection Act (No. 24 of 2019) data inventory (Week 9, Deliverable 4). Covers every data flow in the deployed AfyaPlus path: the triage API, the MCP logistics server, the agent, and the audit trail. lawful_basis values are TEACHING LABELS for this course project - see dpia_stub.md, 'legal review pending'.",
+  "controller": "AfyaPlus (course project, BenkiYetu scenario)",
+  "owner_of_record": "data protection officer - role unfilled, legal review pending",
+  "last_reviewed": "2026-10-12",
+  "act_reference": "Kenya Data Protection Act 2019; compare GDPR (see gdpr_trigger_note.md)",
+  "datasets": [
+    {
+      "id": "DS-1",
+      "name": "triage_messages",
+      "flow": "POST /triage request bodies and responses",
+      "personal_data": [
+        "patient_id (pseudonymous EMR identifier)",
+        "symptoms free text (may contain health data - sensitive personal data under s.2 DPA)",
+        "age, sex, vitals (health data)"
+      ],
+      "identifiers_hashed_in_logs": ["patient_id"],
+      "lawful_basis": "TEACHING LABEL - health service delivery (compare DPA First Schedule; public health / vital interests reasoning)",
+      "teaching_label": true,
+      "retention_rule": "retention.json -> triage_messages",
+      "store": "API memory / upstream EMR; logs hold redacted+hashed form only",
+      "notes": "Health data is sensitive personal data; the DPIA stub treats every triage message as in-scope."
+    },
+    {
+      "id": "DS-2",
+      "name": "patient_identifiers",
+      "flow": "patient_id in requests; actor username in JWT claims",
+      "personal_data": ["patient_id", "staff username (sub claim)"],
+      "identifiers_hashed_in_logs": ["patient_id", "actor"],
+      "lawful_basis": "TEACHING LABEL - contract / legitimate interest for staff audit identity",
+      "teaching_label": true,
+      "retention_rule": "retention.json -> audit_logs",
+      "store": "JWT (30-min expiry); audit log stores actor_hash only",
+      "notes": "No national ID numbers are collected. redact_then_hash.py scrubs NIN-shaped digit runs defensively."
+    },
+    {
+      "id": "DS-3",
+      "name": "mcp_logistics_queries",
+      "flow": "MCP tools: find_clinic_by_county, plan_delivery_route, check_stock; resource clinics://catalog",
+      "personal_data": [],
+      "identifiers_hashed_in_logs": [],
+      "lawful_basis": "TEACHING LABEL - logistics operations, no personal data in the payload",
+      "teaching_label": true,
+      "retention_rule": "retention.json -> mcp_queries",
+      "store": "MCP server logs (tool name + outcome + trace_id only, never raw arguments)",
+      "notes": "Clinic phone numbers were removed from tool responses in Week 9 (see mcp_server/server.py PUBLIC_CLINIC_KEYS). Route origins are depot locations, not persons."
+    },
+    {
+      "id": "DS-4",
+      "name": "audit_logs",
+      "flow": "redact_then_hash.py -> logs/audit.jsonl",
+      "personal_data": ["hashed actor", "hashed patient_id", "trace_id"],
+      "identifiers_hashed_in_logs": ["actor", "patient_id"],
+      "lawful_basis": "TEACHING LABEL - legitimate interest: security accountability and incident investigation",
+      "teaching_label": true,
+      "retention_rule": "retention.json -> audit_logs",
+      "store": "logs/audit.jsonl (gitignored)",
+      "notes": "deletion_records.jsonl rows are exempt from sweeping - deleting the record of a deletion defeats the audit (see retention_sweep.py)."
+    }
+  ],
+  "cross_border_transfer": {
+    "status": "none in this deployment",
+    "note": "No data leaves the deployment host. If a cloud model backend is ever enabled, this row must be re-assessed before enabling (DPA transfer rules; compare GDPR Chapter V)."
+  },
+  "rights_paths": "rights_lookup.py (access/erasure stub against a static fixture; owner named in manager_brief.md)"
+}

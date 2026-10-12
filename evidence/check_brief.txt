@@ -1,0 +1,50 @@
+$ python check_brief.py
+== check 1: four required headings ==
+OK   ## Risks
+OK   ## Mitigations
+OK   ## Kenya DPA alignment
+OK   ## What we will not claim
+
+== check 2: cited files exist and cover the deliverables ==
+OK   cited: check_brief.py
+OK   cited: check_gitignore.py
+OK   cited: data_inventory.json
+OK   cited: deletion_records.jsonl
+OK   cited: deploy/docker-compose.yml
+OK   cited: dpia_stub.md
+OK   cited: evidence/transit_policy_denied.txt
+OK   cited: gdpr_trigger_note.md
+OK   cited: injection_guard.py
+OK   cited: logs/audit.jsonl
+OK   cited: mcp_server/clinics_allowlist.json
+OK   cited: mcp_server/server.py
+OK   cited: rbac.py
+OK   cited: redact_then_hash.py
+OK   cited: residual_risk.txt
+OK   cited: resolve_secrets.py
+OK   cited: retention.json
+OK   cited: retention_sweep.py
+OK   cited: rights_lookup.py
+OK   cited: secret_refs.yaml
+OK   cited: test_rbac.py
+OK   cited: transit_policy.py
+OK   cited: triage_api/app.py
+evidence files cited: 14/14
+
+== check 3: no banned overclaims ==
+OK   banned term absent: 'unhackable'
+OK   banned term absent: 'un-hackable'
+OK   banned term absent: '100% secure'
+OK   banned term absent: '100 percent secure'
+OK   banned term absent: 'fully secure'
+OK   banned term absent: 'cannot be hacked'
+OK   banned term absent: "can't be hacked"
+OK   banned term absent: 'immune to attack'
+OK   banned term absent: 'tamper-proof'
+OK   banned term absent: 'tamper proof'
+
+== check 4: finance line recommends, does not decide ==
+OK   finance paragraph recommends rather than decides
+
+Brief passes: four headings, real citations, no overclaim, finance humility present.
+exit=0

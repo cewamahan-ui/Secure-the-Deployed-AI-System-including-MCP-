@@ -1,0 +1,3 @@
+$ python corpus_pin.py
+pin OK: 7 corpus files match knowledge/pin.json
+exit=0

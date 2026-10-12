@@ -1,0 +1,10 @@
+$ python rbac.py  # role matrix
+role              | agent_ask | check_stock | clinics_catalog | find_clinic_by_county | plan_delivery_route
+------------------+-----------+-------------+-----------------+-----------------------+--------------------
+auditor           | no        | no          | yes             | yes                   | no                 
+dispatcher        | yes       | yes         | yes             | yes                   | yes                
+logistics_partner | no        | yes         | no              | yes                   | no                 
+triage_nurse      | no        | no          | no              | yes                   | no                 
+
+rbac self-check passed: unknown role denied, partner scope minimal.
+exit=0

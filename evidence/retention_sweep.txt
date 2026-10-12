@@ -1,0 +1,5 @@
+$ python retention_sweep.py
+swept 6 records: kept 3, deleted 3
+wrote fixtures\triage_store.swept.json
+deletion record appended to deletion_records.jsonl (itself never swept)
+exit=0

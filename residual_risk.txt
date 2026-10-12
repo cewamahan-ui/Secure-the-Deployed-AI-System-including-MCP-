@@ -1,0 +1,58 @@
+Residual risk register - AfyaPlus Week 9 (2026-10-12)
+Format: id | risk | why it survives | owner | next step
+
+RR-01 | Prompt-injection guard is pattern-based, not complete.
+      | injection_guard.py matches ~9 rewrite/override patterns. Novel
+      | phrasings (paraphrase, encoding, multi-turn) can pass. The stub
+      | model caps blast radius today; a real LLM backend raises it.
+      | Owner: ml-eng. Next step: add a model-side input classifier and
+      | re-test with the Week 5 adversarial set before enabling any LLM.
+
+RR-02 | JWT secret rotation is manual.
+      | secret_refs.yaml declares 90-day rotation but nothing enforces
+      | it; no automated revoke-and-reissue exists.
+      | Owner: platform-security. Next step: scheduled rotation task
+      | that redeploys the compose stack with a fresh secret.
+
+RR-03 | Retention sweeper is a stub, not a scheduled job.
+      | retention_sweep.py works against fixtures/triage_store.json;
+      | no cron entry touches a production store. The 30-day rule is
+      | stated, not yet enforced in production.
+      | Owner: engineering lead. Next step: cron the sweep against the
+      | real store once one exists; keep protect_deletion_log() first.
+
+RR-04 | Hashed identifiers could be brute-forced offline.
+      | redact_then_hash.py truncates to 12 hex chars with a process
+      | salt. A 9-digit NIN space is small; if a salt ever leaked,
+      | dictionary re-identification becomes realistic.
+      | Owner: platform-security. Next step: move the salt into the
+      | secret path (AUDIT_HASH_SALT is already read from env) and
+      | rotate it per period.
+
+RR-05 | TLS termination is asserted, not deployed.
+      | transit_policy.py refuses cleartext partner hosts in code, but
+      | this lab never terminates TLS. A production deploy must front
+      | the API with TLS and re-run the policy check against the real
+      | hostname.
+      | Owner: platform-security. Next step: deploy behind a TLS
+      | terminator, capture the check against the live hostname.
+
+RR-06 | Demo credentials still exist in auth.py.
+      | Week 6's demo users (olu/dispatcher) are convenient for class
+      | and wrong for production. JWT_SECRET fail-closed is done; the
+      | user table is not.
+      | Owner: engineering lead. Next step: replace with a real user
+      | store or disable /token outside lab mode.
+
+RR-07 | No DPO, no lawyer, no regulator contact.
+      | Every lawful_basis value is a TEACHING LABEL. Legal review is
+      | pending and named in manager_brief.md. Until a real review
+      | happens, none of the DPA alignment is legally relied upon.
+      | Owner: BenkiYetu (scenario). Next step: appoint DPO, run real
+      | DPIA consultation (dpia_stub.md section 4 is the template).
+
+RR-08 | check_stock quantities are a teaching fixture.
+      | mcp_server/data/stock.json is static; a live inventory feed
+      | would need its own access control and staleness handling.
+      | Owner: logistics-operations. Next step: none until a real feed
+      | exists; keep the smallest-useful-dict contract.

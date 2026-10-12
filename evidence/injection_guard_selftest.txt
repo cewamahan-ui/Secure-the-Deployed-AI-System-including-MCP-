@@ -1,0 +1,4 @@
+$ python injection_guard.py
+clean input blocked? False
+attack input blocked? True -> ['ignore_previous', 'env_dump']
+exit=0

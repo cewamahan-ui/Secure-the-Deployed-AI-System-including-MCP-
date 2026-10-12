@@ -1,0 +1,12 @@
+{
+  "_comment": "Static fixture for rights_lookup.py. Synthetic subject; held/stores map mirrors data_inventory.json.",
+  "subjects": {
+    "P-1042": {
+      "held": [
+        "triage_messages (2 messages, upstream EMR store)",
+        "audit_logs (hashed actor + subject rows, logs/audit.jsonl)"
+      ],
+      "stores": ["upstream EMR", "logs/audit.jsonl (hashes only)"]
+    }
+  }
+}

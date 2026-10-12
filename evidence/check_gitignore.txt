@@ -1,0 +1,17 @@
+$ python check_gitignore.py
+== check 1: gitignore covers every secret-shaped path ==
+OK   .env ignored=True
+OK   .env.* ignored=True
+OK   *.pem ignored=True
+OK   *.key ignored=True
+OK   credentials ignored=True
+OK   secrets.yaml ignored=True
+OK   secrets.yml ignored=True
+OK   *.p12 ignored=True
+OK   *.pfx ignored=True
+
+== check 2: no secret-shaped file is tracked by git ==
+OK   scanned 0 tracked files, no secret-shaped paths
+
+All checks passed: no secrets in git, no secret-shaped path unignored.
+exit=0

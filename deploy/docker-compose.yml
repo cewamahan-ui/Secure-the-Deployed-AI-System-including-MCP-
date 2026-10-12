@@ -1,0 +1,31 @@
+services:
+  triage_api:
+    build: .
+    ports:
+      - "8000:8000"
+    # ${JWT_SECRET} with NO default: compose refuses to boot the service
+    # when the variable is unset. This is the deploy-layer fail-closed
+    # gate; resolve_secrets.py is the same gate at the process layer.
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - AUDIT_HASH_SALT=${AUDIT_HASH_SALT:-}
+    env_file:
+      - .env          # gitignored; see .gitignore and check_gitignore.py
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  mcp_server:
+    build: .
+    command: ["python", "-m", "mcp_server.server"]
+    ports:
+      - "8765:8765"
+    environment:
+      - MCP_TRANSPORT=streamable-http
+    volumes:
+      # Read-only mounts: the MCP server cannot rewrite its own
+      # allowlist or corpus at runtime (poisoning surface, Week 4.7).
+      - ./mcp_server/clinics_allowlist.json:/app/mcp_server/clinics_allowlist.json:ro
+      - ./mcp_server/data:/app/mcp_server/data:ro

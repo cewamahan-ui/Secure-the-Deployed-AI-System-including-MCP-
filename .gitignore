@@ -1,0 +1,22 @@
+# Secrets are never committed (Week 9, Deliverable 1).
+# check_gitignore.py asserts these patterns cover every secret-shaped path.
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials
+secrets.yaml
+secrets.yml
+
+# Runtime artefacts
+__pycache__/
+*.pyc
+.pytest_cache/
+logs/*.jsonl
+!logs/.gitkeep
+
+# Local venv
+.venv/
+venv/

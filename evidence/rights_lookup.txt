@@ -1,0 +1,17 @@
+$ python rights_lookup.py --subject P-1042
+{
+  "subject_id": "P-1042",
+  "found": true,
+  "held": [
+    "triage_messages (2 messages, upstream EMR store)",
+    "audit_logs (hashed actor + subject rows, logs/audit.jsonl)"
+  ],
+  "stores": [
+    "upstream EMR",
+    "logs/audit.jsonl (hashes only)"
+  ],
+  "lawful_basis_note": "TEACHING LABEL - see data_inventory.json; legal review pending"
+}
+
+Next step: open a ticket with the owner in RIGHTS_OWNERS (access -> engineering lead (acting data protection officer); erasure -> platform-security).
+exit=0

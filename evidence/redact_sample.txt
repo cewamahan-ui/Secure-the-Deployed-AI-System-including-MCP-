@@ -1,0 +1,6 @@
+$ python redact_then_hash.py
+sample audit line written to D:\VS CODE PROJ\APPLIED AI ENGINEERING\afyaplus-ai-\week 9\capstone 9\logs\audit.jsonl
+{"ts": "2026-10-12T13:25:22+00:00", "trace_id": "trace-sample-1", "actor": "olu", "actor_hash": "44277739d4ea", "action": "triage", "resource": "/triage", "outcome": "ok", "subject_hash": "0ca4fbc1e63d", "payload": {"symptoms": ["chest pain", "shortness of breath"], "note": "caller reached us on [REDACTED], [REDACTED]", "age": 58}, "redacted_fields": ["note", "patient_id"], "guard": null}
+
+raw token / phone / patient id present in line: False
+exit=0

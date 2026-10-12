@@ -1,0 +1,51 @@
+2026-10-12 16:26:46,723 INFO afyaplus.mcp call tool=find_clinic_by_county outcome=ok:2 trace_id=sample
+2026-10-12 16:26:46,723 INFO afyaplus.mcp call tool=check_stock outcome=ok trace_id=sample
+2026-10-12 16:26:46,724 INFO afyaplus.mcp call tool=check_stock outcome=error:not_allowlisted trace_id=sample
+2026-10-12 16:26:46,724 INFO afyaplus.mcp call tool=check_stock outcome=error:not_allowlisted trace_id=sample
+$ find_clinic_by_county('Kisumu', 'obstetric')
+{
+  "county": "kisumu",
+  "count": 2,
+  "clinics": [
+    {
+      "id": "CL-003",
+      "name": "Jaramogi Oginga Odinga Teaching & Referral Hospital",
+      "county": "Kisumu",
+      "services": [
+        "emergency",
+        "obstetric",
+        "pediatric",
+        "surgery",
+        "imaging",
+        "icu"
+      ]
+    },
+    {
+      "id": "CL-004",
+      "name": "Kisumu County Referral Hospital",
+      "county": "Kisumu",
+      "services": [
+        "emergency",
+        "obstetric",
+        "pediatric"
+      ]
+    }
+  ]
+}
+
+$ check_stock('CL-003', 'oxytocin 10iu')   # smallest useful dict
+{
+  "clinic_id": "CL-003",
+  "item": "oxytocin 10iu",
+  "units": 130
+}
+
+$ check_stock('CL-006', 'amoxicillin 500mg')   # off-allowlist: denied, no enumeration
+{
+  "error": "clinic_id 'CL-006' is not on the partner allowlist"
+}
+
+$ check_stock('Kisumu', 'oxytocin 10iu')   # county as clinic_id: error, never a dump
+{
+  "error": "clinic_id 'KISUMU' is not on the partner allowlist"
+}

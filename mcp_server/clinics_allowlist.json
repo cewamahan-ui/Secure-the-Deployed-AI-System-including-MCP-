@@ -1,0 +1,6 @@
+{
+  "_comment": "Partner-facing MCP allowlist (Week 9). Only these clinic ids are visible to find_clinic_by_county, plan_delivery_route, check_stock and the clinics://catalog resource. Removing an id here narrows every tool at once. Fail closed: if this file is missing or empty, the server denies everything.",
+  "owner": "logistics-operations",
+  "last_reviewed": "2026-10-12",
+  "clinic_ids": ["CL-001", "CL-002", "CL-003", "CL-004", "CL-005", "CL-007"]
+}

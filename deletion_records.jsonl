@@ -1,0 +1,2 @@
+{"deleted_at": "2026-10-01T08:00:00+00:00", "dataset": "triage_messages", "record_id": "TM-OLD-77", "count": 1, "actor": "retention_sweep", "rule": "retention.json"}
+{"deleted_at": "2026-10-12T13:07:26+00:00", "dataset": "triage_messages", "record_id": "bulk-sweep", "count": 3, "actor": "retention_sweep", "rule": "retention.json"}

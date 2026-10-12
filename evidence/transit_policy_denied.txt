@@ -1,0 +1,7 @@
+$ python transit_policy.py
+ALLOW http://localhost:8000/health -> http on localhost - documented lab exception (no production data)
+ALLOW https://api.benkiyetu.co.ke/triage -> https - TLS in transit
+DENY  http://partner.benkiyetu.co.ke/triage -> cleartext http to host 'partner.benkiyetu.co.ke' refused - partner and production URLs must be https (encryption in transit)
+
+1 URL(s) denied by transit policy (expected: the cleartext partner URL).
+exit=1

@@ -1,0 +1,5 @@
+$ python encrypt_at_rest.py
+wrote D:\VS CODE PROJ\APPLIED AI ENGINEERING\afyaplus-ai-\week 9\capstone 9\evidence\at_rest_sample.bin (392 bytes)
+master key reference: alias/afyaplus-at-rest (reference only, no value)
+plaintext readable in blob: False
+exit=0

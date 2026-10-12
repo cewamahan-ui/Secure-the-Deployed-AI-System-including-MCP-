@@ -1,0 +1,27 @@
+{
+  "_comment": "AWS KMS twin card (Week 9, Deliverable 1). The primary path stores at-rest master keys in Azure Key Vault; this card is the documented AWS equivalent so the audit story is complete even with no AWS account. No credentials, no ARNs that grant anything - references only.",
+  "service": "AWS KMS (twin of Azure Key Vault keys)",
+  "status": "fallback-card-only-not-live",
+  "declared_in": "README.md section 'Fallbacks declared'",
+  "keys": [
+    {
+      "alias": "alias/afyaplus-at-rest",
+      "purpose": "Envelope-encryption master key for triage message stores and audit logs",
+      "env_ref": "AWS_KMS_KEY_ID",
+      "rotation_days": 365,
+      "algorithm": "AES_256",
+      "key_spec": "SYMMETRIC_DEFAULT"
+    },
+    {
+      "alias": "alias/afyaplus-log-hash",
+      "purpose": "HMAC key namespace for hashed identifiers in redacted audit logs",
+      "env_ref": "AWS_KMS_LOG_HMAC_KEY",
+      "rotation_days": 180,
+      "algorithm": "HMAC_224_256_384_512",
+      "key_spec": "HMAC_256"
+    }
+  ],
+  "envelope_pattern": "data key generated per batch -> encrypted under the KMS key -> wrapped key + ciphertext stored together (see encrypt_at_rest.py for the local teaching implementation)",
+  "who_to_ask": "platform-security owns both aliases; rotation tickets are tracked in the same queue as the Key Vault rotation",
+  "teaching_note": "This card exists so a marker can see the at-rest story end to end without a cloud console. It is NOT evidence of a live AWS account - the README fallback checkbox for 'no AWS account' stays ticked."
+}

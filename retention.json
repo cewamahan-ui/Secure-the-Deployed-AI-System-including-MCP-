@@ -1,0 +1,34 @@
+{
+  "_comment": "Retention rules (Week 9, Deliverable 4). Keyed on the dataset ids in data_inventory.json. retention_sweep.py reads this file; a rule with no sweeper entry is a poster, not a control - the sweeper stub enforces these.",
+  "last_reviewed": "2026-10-12",
+  "rules": {
+    "triage_messages": {
+      "retention_days": 30,
+      "legal_hold_exempt": true,
+      "action": "delete",
+      "basis": "TEACHING LABEL - minimum necessary period for clinical follow-up; legal review pending"
+    },
+    "mcp_queries": {
+      "retention_days": 90,
+      "legal_hold_exempt": false,
+      "action": "delete",
+      "basis": "TEACHING LABEL - operational debugging window"
+    },
+    "audit_logs": {
+      "retention_days": 365,
+      "legal_hold_exempt": false,
+      "action": "delete",
+      "basis": "TEACHING LABEL - accountability and incident investigation window"
+    },
+    "deletion_records": {
+      "retention_days": null,
+      "legal_hold_exempt": true,
+      "action": "never_delete",
+      "basis": "TEACHING LABEL - the record of a deletion must outlive the sweep that performed it"
+    }
+  },
+  "sweeper": {
+    "script": "retention_sweep.py",
+    "mode": "stub - demonstrates the sweep against a fixture store; the production job would be a cron entry calling the same function"
+  }
+}

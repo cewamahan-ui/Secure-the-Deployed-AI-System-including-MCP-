@@ -1,0 +1,29 @@
+{
+  "_comment": "Corpus pin (model/corpus poisoning control). Verify with corpus_pin.py; re-pin only after a reviewed change.",
+  "algorithm": "sha256",
+  "last_reviewed": "2026-10-12",
+  "reviewed_by": "ml-eng (course project)",
+  "files": {
+    "mcp_server/data/clinics.json": {
+      "sha256": "9fd7e277804a4cac9fd6797294be19e4f2f914ee0c345168107fe7008c289b14"
+    },
+    "mcp_server/data/stock.json": {
+      "sha256": "f7a39001f9cfe24a2a59e5f2c38ba5d09c3ad88fba8e8d8c28ecbeb3d648b096"
+    },
+    "mcp_server/clinics_allowlist.json": {
+      "sha256": "f9df4ca05092da04e796a0dd0ffdeb247df6a781d03524ecf6234be7ec40176c"
+    },
+    "fixtures/triage_store.json": {
+      "sha256": "2e39b738641d9453d361b5c1abbafbf8b73d950071e66c3ed813c76e0784bc48"
+    },
+    "fixtures/rights_subject.json": {
+      "sha256": "773a7e35b0bb091ff3b234aff3beb8a84278e714d535c05a954a32115c57e2f8"
+    },
+    "data_inventory.json": {
+      "sha256": "ccced1d6d19f464e772fa9c2ea5956d64aaf67b917bcfae47d3618f7244327a0"
+    },
+    "retention.json": {
+      "sha256": "a0634b824fc4b1b9b095a88d8a039402d08392a9bb55cb923de9c5ac74f342ce"
+    }
+  }
+}
